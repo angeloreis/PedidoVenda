@@ -1,0 +1,57 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="corpo">
+		<h:form>
+			<h1>Pesquisa de Usuários</h1>
+			
+			<p:toolbar style="margin-top: 20px;">
+				<p:toolbarGroup>
+					<p:button value="Pesquisar" />								
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Novo" outcome="/usuarios/CadastroUsuario"/>
+				</p:toolbarGroup>
+			</p:toolbar>
+			
+			<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px;"
+						  columnClasses="rotulo,campo">
+						  
+				<p:outputLabel value="Nome"/>
+				<p:inputText size="60" />				
+								
+			</p:panelGrid>			
+			
+			<p:dataTable id="usuarioTable" value="#{pesquisaUsuariosBean.usuariosFiltrados}"
+							var="usuario" style="margin-top:20px" emptyMessage="Nenhum pedido encontrado"
+							rows="5" paginator="true" paginatorAlwaysVisible="false"
+							paginatorPosition="bottom">
+					
+					<p:column headerText="Nome">
+						<h:outputText value="Angelo Sá de Oliveira dos Reis"/>
+					</p:column>
+					<p:column headerText="E-mail" style="width: 410px">
+						<h:outputText value="angelo.desenvolvedor@gmail.com"/>
+					</p:column>
+					<p:column style="width: 50px; text-align: center">
+						<p:button icon="ui-icon-pencil" title="Editar"/>					
+						<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="confirmacaoExclusaoUsuario.show()"/>
+					</p:column>
+				</p:dataTable>	
+				
+			<p:confirmDialog header="Exclusão de usuário" message="Deseja excluir o usuário?"
+		 		widgetVar="confirmacaoExclusaoUsuario">
+		 		<p:button value="Não" icon="ui-icon-closethick" onclick="confirmacaoExclusaoUsuario.hide(); return false;"/>
+		 		<p:commandButton value="Sim" icon="ui-icon-check" oncomplete="confirmacaoExclusaoUsuario.hide();"/>
+			</p:confirmDialog>	
+		
+		</h:form>
+		
+		
+	</ui:define>
+	
+</ui:composition>
