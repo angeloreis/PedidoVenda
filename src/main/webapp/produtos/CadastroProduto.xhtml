@@ -6,6 +6,12 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="corpo">
+	
+	<f:metadata>
+		<f:viewParam name="dummy"/>
+		<f:event listener="#{cadastroProdutoBean.inicializar}" type="preRenderView"/>
+	</f:metadata>
+	
 		<h:form>
 			<h1>Novo Produto</h1>
 			
@@ -31,8 +37,10 @@
 				<p:inputText id="nome" size="60" maxlength="80" value="#{cadastroProdutoBean.produto.nome}"/>	
 				
 				<p:outputLabel value="Categoria" for="categoria" />
-				<p:selectOneMenu id="categoria">
+				<p:selectOneMenu id="categoria" value="#{cadastroProdutoBean.categoriaPai}">
 					<f:selectItem itemLabel="Selecione a Categoria"/>
+					<f:selectItems value="#{cadastroProdutoBean.categoriaRaizes}" var="categoria"
+									itemValue="#{categoria}" itemLabel="#{categoria.descricao}"/>
 				</p:selectOneMenu>
 				
 				<p:outputLabel value="Subcategoria" for="subCategoria" />

@@ -21,5 +21,5 @@ public @interface SKU {
 
 	Class<?>[] groups() default {};
 
-	Class<? extends Payload>[] paylod() default {};
+	Class<? extends Payload>[] payload() default {};
 }
